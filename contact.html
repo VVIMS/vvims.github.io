@@ -58,7 +58,8 @@
             </div>
             <div class="text">
             <span>Call</span>
-            <span>Call Us: +91 80753 10610</span>
+            <span>Ph: +91 80753 10610 </span>
+                  <span>Ph: +91 70128 42900 </span>
             </div>
           </div>
           <div
@@ -164,7 +165,7 @@
 			<div class="container">
 				<div class="row d-flex align-items-stretch no-gutters">
 					<div class="col-md-6 p-4 p-md-5 order-md-last bg-light">
-						<form action="#">
+						<form id="contactForm" >
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Your Name" name="name">
               </div>
@@ -178,7 +179,7 @@
                 <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message" ></textarea>
               </div>
               <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                <button type="submit"  class="btn btn-primary py-3 px-5 submit-button">Send Message</button>
               </div>
             </form>
 					</div>
@@ -320,6 +321,56 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+    $("#contactForm").submit((e)=>{
+      e.preventDefault()
+      $.ajax({
+        url:"https://script.google.com/macros/s/AKfycbzCvZZFTam3znPMgLe85JtBaRbWn1TmX3OtKEj7e1nlP4GcwuuHkzznge9u9cTFjSiQMA/exec",
+        data:$("#contactForm").serialize(),
+        method:"post",
+        beforeSend:function(){
+            $('.submit-button').attr('disabled',true);
+            $('.submit-button').html('Loading...');
+  
+        },
+        success:function (response){
+          
+          window.location.reload()
+          //window.location.href="https://google.com"
+        },
+        error:function (err){
+          alert("Something Error")
+  
+        }
+      })
+    })
+  </script>
+
+<script>
+  (function (w, d, s, u) {
+  w.gbwawc = {
+  url: u,
+  options: {
+          waId: "+91 7012842900",
+          siteName: "VVIMS",
+          siteTag: "Online",
+          siteLogo: "https://waw.gallabox.com/chatbotavatars/3.png",
+          widgetPosition: "RIGHT",
+          triggerMessage: "",
+          welcomeMessage: "hi there!\n",
+          brandColor: "#25D366",
+          messageText: "How can i help you ?",
+          //replyOptions: ['know more '],
+      },
+  };
+  var h = d.getElementsByTagName(s)[0],
+  j = d.createElement(s);
+  j.async = true;
+  j.src = u + "/whatsapp-widget.min.js?_=" + Math.random();
+  h.parentNode.insertBefore(j, h);
+  })(window, document, "script", "https://waw.gallabox.com");
+  </script>
     
   </body>
 </html>
